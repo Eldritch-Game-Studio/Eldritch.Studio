@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eldritch Game Studio</title>
-    <link rel="preload" href="./DevinneSwash-qZd5.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="/favicon.png">
     <style>
         @font-face {
             font-family: 'DevinneSwash';
@@ -12,7 +12,6 @@
             font-weight: normal;
             font-style: normal;
         }
-        
         html, body {
             margin: 0;
             padding: 0;
@@ -28,21 +27,28 @@
             object-fit: cover;
         }
         .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
+            position: relative;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            font-family: 'DevinneSwash', Palatino, 'Palatino Linotype', serif;
+            transition: opacity 7s ease-out;
+        }
+        .overlay div {
+            position: absolute;
+            bottom: 25%;
+            left: 50%;
+            transform: translateX(-50%);
             color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             font-size: 4vw;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            font-family: 'DevinneSwash', Palatino, 'Palatino Linotype', serif;
+        }
+        @media screen and (min-width: 1024px) {
+            .overlay div {
+                font-size: 40px;
+            }
         }
         .twitter-button-container {
             position: absolute;
@@ -64,7 +70,9 @@
         <source src="https://eldritch.studio/AudioTrack.mp3" type="audio/mpeg">
         Your browser does not support the audio tag.
     </audio>
-    <div class="overlay" id="overlay">Click or tap to enter the unknown...</div>
+    <div class="overlay">
+        <div id="overlay-text">Click or tap to enter the unknown...</div>
+    </div>
     <div class="twitter-button-container">
         <a href="https://twitter.com/EldritchGS?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @eldritchGS</a>
     </div>
@@ -72,16 +80,16 @@
     <script>
         var myVideo = document.getElementById('Eldritch Studio');
         var myAudio = document.getElementById('Eldritch Audio');
-        var myOverlay = document.getElementById('overlay');
-
+        var myOverlay = document.getElementsByClassName('overlay')[0];
+    
         document.body.addEventListener("click", function() {
             if(myVideo.muted){
-              myVideo.muted = false;
-              myAudio.muted = false;
-              myOverlay.style.display = 'none';
-              if(myAudio.paused){
-                 myAudio.play();
-              }
+                myVideo.muted = false;
+                myAudio.muted = false;
+                myOverlay.style.opacity = 0;
+                if(myAudio.paused){
+                    myAudio.play();
+                }
             }
         });
     </script>
