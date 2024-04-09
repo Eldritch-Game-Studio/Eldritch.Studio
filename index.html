@@ -3,21 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eldritch Game Studio</title>
+    <title>Eldritch Game Studio</title> <!-- Website Title -->
+    <!-- Link to the favicon -->
     <link rel="icon" type="image/x-icon" href="favicon2.png">
+
     <style>
+        /* Importing external font from a file */
         @font-face {
             font-family: 'DevinneSwash';
             src: url('./DevinneSwash-qZd5.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
         }
+
+        /* CSS reset to avoid default browser styles */
         html, body {
             margin: 0;
             padding: 0;
             height: 100%;
             overflow: hidden;
         }
+
+        /* Adding styles for the background video */
         video {
             position: absolute;
             top: 0;
@@ -26,6 +33,8 @@
             height: 100%;
             object-fit: cover;
         }
+
+        /* Overlay CSS styles */
         .overlay {
             position: relative;
             height: 100%;
@@ -34,6 +43,7 @@
             font-family: 'DevinneSwash', Palatino, 'Palatino Linotype', serif;
             transition: opacity 7s ease-out;
         }
+
         .overlay div {
             position: absolute;
             bottom: 25%;
@@ -45,20 +55,26 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        
         @media screen and (min-width: 1024px) {
             .overlay div {
                 font-size: 40px;
             }
         }
+
+        /* CSS for twitter button */
         .twitter-button-container {
             position: absolute;
             bottom: 5%;
             width: 100%;
             text-align: center;
         }
+
         .twitter-follow-button {
-            color: #fff; 
+            color: #fff;
         }
+
+        /* Mute button styles */
         .mute-button-container {
             position: absolute;
             bottom: 0;
@@ -76,83 +92,96 @@
             cursor: pointer;
             padding: 15px;
         }
+
+        /* Load overlay style */
         #load-overlay {
             background: black;
             position: fixed;
             left: 0; top: 0;
             width: 100%; height: 100%;
-            z-index: -1;
             opacity: 1;
-            transition: opacity 2s; /* sets the speed of fading */ 
+            transition: opacity 2s; /* sets the speed of fading */
+            z-index: 99;
         }
     </style>
 </head>
 <body>
-    <video id="Eldritch Studio" autoplay loop muted>
-        <source src="https://s3.us-west-2.amazonaws.com/eldritch.studio/dcrawl.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <audio id="Eldritch Audio" loop muted>
-        <source src="https://eldritch.studio/AudioTrack.mp3" type="audio/mpeg">
-        Your browser does not support the audio tag.
-    </audio>
-    <div class="overlay">
-        <div id="overlay-text">Click or tap to enter the unknown...</div>
-    </div>
-    <div class="twitter-button-container">
-        <a href="https://twitter.com/EldritchGS?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @eldritchGS</a>
-    </div>
-    <div class="mute-button-container">
-        <button id="mute-button"><img id="muteImage" src="unmute.png"></button>
-    </div>
-    <div id="load-overlay"></div>
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    <script>
-        var myVideo = document.getElementById('Eldritch Studio');
-        var myAudio = document.getElementById('Eldritch Audio');
-        var myOverlay = document.getElementsByClassName('overlay')[0];
-        var muteButtonContainer = document.querySelector('.mute-button-container');
-        var muteButton = document.getElementById('mute-button');
-        var muteImage = document.getElementById('muteImage');
+<div id="load-overlay"></div> <!-- Initial load overlay -->
+<video id="Eldritch Studio" autoplay loop muted>
+    <!-- Video source and fallback text -->
+    <source src="https://s3.us-west-2.amazonaws.com/eldritch.studio/dcrawl.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<audio id="Eldritch Audio" loop muted>
+    <!-- Audio source and fallback text -->
+    <source src="https://eldritch.studio/AudioTrack.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+</audio>
 
-        var isInitialized = false;
-        var isMuted = true; // Initialize as true assuming autoplay with muted
+<!-- Main overlay with text -->
+<div class="overlay">
+    <div id="overlay-text">Click or tap to enter the unknown...</div>
+</div>
 
-        document.body.addEventListener("click", function() {
-            if(!isInitialized){
-                isInitialized = true;
-                myVideo.muted = false;
-                myAudio.muted = false;
-                muteImage.src = "unmute.png";
-                myOverlay.style.opacity = 0;
-                muteButtonContainer.classList.add('visible');
-                if(myAudio.paused){
-                    myAudio.play();
-                }
-                isMuted = false; 
+<!-- Twitter widget -->
+<div class="twitter-button-container">
+    <a href="https://twitter.com/EldritchGS?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @eldritchGS</a>
+</div>
+
+<!-- Mute and Unmute option -->
+<div class="mute-button-container">
+    <button id="mute-button"><img id="muteImage" src="unmute.png"></button>
+</div>
+
+<!-- Twitter widget script -->
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<script>
+    /* JavaScript that manages the video playback */
+    var videoPlayer = document.getElementById('Eldritch Studio');
+    var audioPlayer = document.getElementById('Eldritch Audio');
+    var mainOverlay = document.getElementsByClassName('overlay')[0];
+    var muteButtonContainer = document.querySelector('.mute-button-container');
+    var muteButton = document.getElementById('mute-button');
+    var muteImage = document.getElementById('muteImage');
+    var isInitialized = false;
+    var isMuted = true; // Initialize as true assuming autoplay with muted
+
+    /* Toggles the mute state while updating the image */
+    function toggleMuteState(isMuted) {
+        videoPlayer.muted = isMuted;
+        audioPlayer.muted = isMuted;
+        muteImage.src = isMuted ? "mute.png" : "unmute.png";
+    }
+``
+    /* Play audio when user interacts with the document */
+    document.body.addEventListener("click", function() {
+        if(!isInitialized){
+            isInitialized = true;
+            toggleMuteState(false);
+            mainOverlay.style.opacity = 0;
+            muteButtonContainer.classList.add('visible');
+            if(audioPlayer.paused){
+                audioPlayer.play();
             }
-        });
-
-        muteButton.addEventListener("click", function() {
-            if(!isMuted){ // If the sound is playing, then mute
-                myVideo.muted = true;
-                myAudio.muted = true;
-                muteImage.src = "mute.png";
-                isMuted = true;
-            } else { // If the sound is muted, then unmute
-                myVideo.muted = false;
-                myAudio.muted = false;
-                muteImage.src = "unmute.png";
-                isMuted = false;
-            }
-        });
-
-        window.addEventListener('load', fadeoutBlackOverlay);
-
-        function fadeoutBlackOverlay(){
-            document.getElementById('load-overlay').style.opacity = "0";
+            isMuted = false;
         }
-        
-    </script>
+    });
+
+    /* Add event listener to mute button for muting and unmuting audio */
+    muteButton.addEventListener("click", function() {
+        isMuted = !isMuted;
+        toggleMuteState(isMuted);
+    });
+
+    /* Disables pointer events on load overlay */
+    document.getElementById('load-overlay').style.pointerEvents = "none";
+
+    /* Fades out the black overlay on window load */
+    function fadeoutBlackOverlay() {
+        document.getElementById('load-overlay').style.opacity = "0";
+    }
+    window.addEventListener('load', fadeoutBlackOverlay);
+</script>
 </body>
 </html>
