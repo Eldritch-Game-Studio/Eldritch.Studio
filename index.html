@@ -62,24 +62,21 @@
         }
     }
 
+
+
     /* CSS for twitter button and mute button */
     .buttons-container {
         position: absolute;
-        bottom: 5%;
-        width: 100%;
+        bottom: 5%; 
+        left: 50%;
+        transform: translateX(-50%);
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
     .twitter-button-container {
-        margin-right: 50px;    /* adjust as per your needs */
         transform: scale(1.5);
-    }
-
-    .mute-button-container {
-        opacity: 0;
-        transition: opacity 7s;
     }
 
     .mute-button-container {
@@ -89,6 +86,17 @@
         align-items: center;
         opacity: 0;
         transition: opacity 7s;
+    }
+
+    @media screen and (max-width: 600px) {
+        .mute-button-container {
+            position: absolute;
+            display: flex;
+            left: calc(50% - 175px);
+            align-items: center;
+            opacity: 0;
+            transition: opacity 7s;
+        }
     }
 
     #mute-button {
@@ -137,7 +145,7 @@
 <!-- Twitter widget and Mute and Unmute option -->
 <div class="buttons-container">
     <!-- Twitter widget -->
-    <div class="twitter-button-container">
+    <div class="twitter-button-container" style="display: flex; justify-content: center;">
         <a href="https://twitter.com/EldritchGS?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @eldritchGS</a>
     </div>
 
