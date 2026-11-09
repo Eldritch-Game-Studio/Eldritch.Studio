@@ -1,0 +1,18 @@
+{
+  "name": "eldritch-studio",
+  "compatibility_date": "2026-11-08",
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    {
+      "pattern": "eldritch.studio",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.eldritch.studio",
+      "custom_domain": true
+    }
+  ]
+}

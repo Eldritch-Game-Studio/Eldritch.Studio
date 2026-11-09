@@ -1,0 +1,324 @@
+@font-face {
+  font-family: "Cinzel";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/cinzel-700.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Cinzel Decorative";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("assets/fonts/cinzel-decorative-900.ttf") format("truetype");
+}
+
+:root {
+  --background: #0b0909;
+  --ivory: #e3d8c4;
+  --metal: #9e927e;
+  --crimson: #e0263c;
+  --gold: #b8925a;
+  --gold-bright: #d8b77e;
+  --surface: #151111;
+  --border: #40372e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: var(--background);
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0;
+  overflow-x: hidden;
+  color: var(--ivory);
+  background:
+    radial-gradient(circle at 50% 35%, rgb(62 13 18 / 18%) 0, transparent 31rem),
+    var(--background);
+  font-family: "Cinzel", Georgia, serif;
+}
+
+.splash {
+  width: min(100%, 76rem);
+  min-height: 100vh;
+  min-height: 100svh;
+  margin-inline: auto;
+  padding: clamp(1.25rem, 2vh, 2rem) clamp(1rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.75rem;
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.emblem {
+  display: block;
+  width: min(70vw, 48.4375rem);
+  height: auto;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 1.5rem rgb(224 38 60 / 10%));
+}
+
+.wordmark {
+  z-index: 1;
+  align-self: center;
+  margin-top: clamp(-5.125rem, -8vw, -2.5rem);
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  color: var(--ivory);
+  font-family: "Cinzel Decorative", Georgia, serif;
+  font-size: clamp(3.15rem, 9.5vw, 9.375rem);
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.studio-line {
+  margin-top: clamp(0.4rem, 1vw, 0.7rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.45rem, 1.2vw, 1.125rem);
+}
+
+.studio-name {
+  padding-left: 0.3em;
+  font-size: clamp(0.85rem, 2.85vw, 2.8125rem);
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.rule {
+  width: clamp(1rem, 4vw, 4rem);
+  height: 3px;
+  background: var(--ivory);
+}
+
+.diamond {
+  width: clamp(0.45rem, 1vw, 0.875rem);
+  aspect-ratio: 1;
+  flex: 0 0 auto;
+  background: var(--crimson);
+  transform: rotate(45deg);
+}
+
+.projects {
+  width: min(100%, 52rem);
+  text-align: center;
+}
+
+.projects h2 {
+  margin: 0 0 0.85rem;
+  color: var(--metal);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.project-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.project {
+  min-width: 0;
+  padding: 0.9rem 1.15rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+  color: var(--gold);
+  background: rgb(21 17 17 / 82%);
+  text-align: left;
+  text-decoration: none;
+  box-shadow: inset 0 1px rgb(227 216 196 / 4%);
+}
+
+.project:hover {
+  border-color: var(--gold);
+  color: var(--gold-bright);
+  background: var(--surface);
+}
+
+.project:focus-visible {
+  outline: 3px solid var(--gold-bright);
+  outline-offset: 4px;
+  color: var(--gold-bright);
+}
+
+.project-name,
+.project-label,
+.project-url {
+  display: block;
+}
+
+.project-name {
+  color: inherit;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+}
+
+.project-label {
+  margin-top: 0.3rem;
+  color: var(--ivory);
+  font-family: Georgia, serif;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.project-url {
+  margin-top: 0.45rem;
+  overflow-wrap: anywhere;
+  color: var(--metal);
+  font-family: ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace;
+  font-size: 0.62rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 40rem) {
+  .splash {
+    justify-content: flex-start;
+  }
+
+  .emblem {
+    width: min(94vw, 31rem);
+  }
+
+  .wordmark {
+    margin-bottom: 0;
+  }
+
+  .rule {
+    display: none;
+  }
+
+  .project-links {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 23rem) {
+  h1 {
+    font-size: 2.75rem;
+  }
+
+  .studio-name {
+    font-size: 0.72rem;
+  }
+}
+
+@media (max-height: 46rem) and (min-width: 41rem) {
+  .splash {
+    padding-block: 1rem;
+    display: grid;
+    grid-template-columns: minmax(20rem, 1fr) minmax(20rem, 1fr);
+    gap: 1.5rem;
+  }
+
+  .emblem {
+    width: min(46vw, 28rem);
+  }
+
+  h1 {
+    font-size: clamp(3rem, 7vw, 5.4rem);
+  }
+
+  .studio-name {
+    font-size: clamp(0.8rem, 2vw, 1.45rem);
+  }
+
+  .project-links {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .diamond,
+  .rule {
+    background: CanvasText;
+  }
+
+  .project {
+    border-color: LinkText;
+  }
+}
+
+.not-found {
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 2rem 1rem;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.not-found img {
+  width: min(64vw, 18rem);
+  height: auto;
+  margin-bottom: -4rem;
+  opacity: 0.72;
+}
+
+.not-found .error-code {
+  margin: 0;
+  color: var(--crimson);
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+}
+
+.not-found h1 {
+  margin-block: 0.5rem;
+  font-size: clamp(2rem, 8vw, 4rem);
+  white-space: normal;
+}
+
+.not-found p {
+  margin-block: 0 1.25rem;
+  color: var(--metal);
+}
+
+.not-found a {
+  color: var(--gold);
+  text-underline-offset: 0.25em;
+}
+
+.not-found a:hover {
+  color: var(--gold-bright);
+}
+
+.not-found a:focus-visible {
+  outline: 3px solid var(--gold-bright);
+  outline-offset: 5px;
+}
